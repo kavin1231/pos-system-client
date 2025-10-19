@@ -1,7 +1,7 @@
 import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {LoadingStatusService} from '../services/loading-status.service';
 import {inject} from '@angular/core';
-import {catchError, throwError} from 'rxjs';
+import {catchError, finalize, throwError} from 'rxjs';
 
 export const httpManagerInterceptor: HttpInterceptorFn = (req, next) => {
 
@@ -14,6 +14,9 @@ export const httpManagerInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error:HttpErrorResponse)=>{
       // catch errors
       return throwError(()=>error)
+    }),
+    finalize(()=>{
+      statusService.status.next(false);
     })
   )
 };
