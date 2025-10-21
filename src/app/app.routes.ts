@@ -6,10 +6,12 @@ import {DashboardOrdersPageComponent} from './pages/dashboard-orders-page/dashbo
 import {DashboardProductPageComponent} from './pages/dashboard-product-page/dashboard-product-page.component';
 import {DashboardCustomerPageComponent} from './pages/dashboard-customer-page/dashboard-customer-page.component';
 import {authGuard} from './guards/auth.guard';
+import {SignupComponent} from './pages/signup/signup.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
   {
     path: 'dashboard', component: DashboardContextComponent, canActivate: [authGuard], children: [
       {path: '', redirectTo: '/dashboard/customers', pathMatch: 'full'},
